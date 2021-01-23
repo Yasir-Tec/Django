@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration</title>
+
+    <style>
+
+        .form{
+          position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 400px;
+  margin: 0 auto 150px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form button{
+
+ margin : 20px;
+
+    font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 30%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+
+  font-size: 10px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+
+
+body {
+  background: #76b852; /* fallback for old browsers */
+  background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+  background: -moz-linear-gradient(right, #76b852, #8DC26F);
+  background: -o-linear-gradient(right, #76b852, #8DC26F);
+  background: linear-gradient(to left, #76b852, #8DC26F);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+    </style>
+
+</head>
+
+
+<body>
+<center>
+    <div class="form" style="margin-top:50px;">
+    {% block content %}
+    {% csrf_token %}
+
+    {% if first_condition %}
+    <h1><b>Thank You!</b></h1>
+    <h3>You have registered Successfully!</h3>
+    <button onclick="login()">LOGIN</button>
+    <button onclick="exit()">EXIT</button>
+    {% endif %}
+
+    {% if second_condition %}
+    <h1><b>Sorry!</b></h1>
+    <h3><b>{{second_condition}}</b></h3>
+    <h5>(Check out verification link on your registered email.)</h5>
+    <button onclick="tryOTP()">TRY AGAIN</button>
+    {% endif %}
+
+    {% if third_condition %}
+    <h1><b>Sorry!</b></h1>
+    <h3><b>{{third_condition}}</b></h3>
+    <button onclick="tryOTP()">TRY AGAIN</button>
+    <button onclick="resendOTP"> Re-send </button>
+    {% endif %}
+
+
+    {% endblock %}</div>
+</center>
+<script>
+    function exit()
+    {
+        window.location = "http://127.0.0.1:8000"
+    }
+    function tryOTP()
+    {
+        window.location = "http://127.0.0.1:8000/redirect/"
+    }
+    function login()
+    {
+        window.location = "http://127.0.0.1:8000/userLoginPage/"
+    }
+</script>
+</body>
+</html>

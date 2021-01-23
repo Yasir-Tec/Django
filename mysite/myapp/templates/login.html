@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Login</title>
+        <style>
+
+        .form{
+          position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 400px;
+  margin: 0 auto 150px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form button{
+
+ margin : 20px;
+
+    font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 30%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+
+  font-size: 10px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+body {
+  background: #76b852; /* fallback for old browsers */
+  background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+  background: -moz-linear-gradient(right, #76b852, #8DC26F);
+  background: -o-linear-gradient(right, #76b852, #8DC26F);
+  background: linear-gradient(to left, #76b852, #8DC26F);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+</style>
+</head>
+<body>
+<div class="form" style="margin-top:30px;">
+<center>
+<form method="post" action="UserLogin/">
+    {% csrf_token %}
+
+    <br>
+    <h2><b>SIGN IN</b></h2>
+
+    <input type="text" name="username" required pattern="[a-zA-Z]+" title="only characters" placeholder="USERNAME"><br><br>
+
+    <input type="password" name="password" required title="Enter password" PLACEHOLDER="PASSWORD"><br><br>
+
+    <button>LOGIN</button> <button onclick="redirect()">EXIT</button>
+    <br>
+    <a href="forgotUserPass/">forgot password?</a>
+
+</form>
+</center>
+</div>
+<script>
+    function redirect()
+    {
+        window.location = "http://127.0.0.1:8000/"
+    }
+</script>
+</body>
+</html>

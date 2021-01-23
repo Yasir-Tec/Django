@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Profile</title>
+     <style>
+
+        .form{
+          position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 400px;
+  margin: 0 auto 150px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form button{
+
+ margin : 20px;
+
+    font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 20%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+
+  font-size: 10px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+
+
+body {
+  background: #76b852; /* fallback for old browsers */
+  background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+  background: -moz-linear-gradient(right, #76b852, #8DC26F);
+  background: -o-linear-gradient(right, #76b852, #8DC26F);
+  background: linear-gradient(to left, #76b852, #8DC26F);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+    </style>
+</head>
+<body>
+<div class="form" style="margin-top:30px;">
+<form action="updated/" method="post">
+    <h2>EDIT PROFILE</h2>
+    {% block content %}
+    {% csrf_token %}
+    {% for i in userdata %}
+    <label> Name:</label>
+    <input type="text" name="fname" value={{i.first_name}}> <input type="text" name="lname"
+                                                                   value="{{i.last_name}}"><br><br>
+    <label>Email : </label>
+    <input type="text" name="email" value="{{i.email}}"><br><br>
+    <label>Mobile Number :</label>
+    <input type="text" name="mobile" value="{{i.mobile}}"><br><br>
+    <label>Username :</label>
+    <input type="text" name="username" value="{{i.username}}"><br><br>
+    <button>UPDATE</button>
+    {% endfor %}
+</form>
+    {% if temp %}
+    <h2>Thank You!</h2>
+    {{temp}}
+      <button onclick="redirect()">EXIT</button>
+    {% endif %}
+
+    {% endblock %}
+
+</div>
+<script>
+    function redirect()
+    {
+        window.location = "http://127.0.0.1:8000/"
+    }
+</script>
+
+</body>
+</html>

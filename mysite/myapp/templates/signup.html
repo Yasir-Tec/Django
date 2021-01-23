@@ -1,0 +1,158 @@
+{% load static %}
+{% block content %}
+<html>
+<head>
+    <style type="text/css">
+        .login-page {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 400px;
+  margin: 0 auto 150px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+body {
+  background: #76b852; /* fallback for old browsers */
+  background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+  background: -moz-linear-gradient(right, #76b852, #8DC26F);
+  background: -o-linear-gradient(right, #76b852, #8DC26F);
+  background: linear-gradient(to left, #76b852, #8DC26F);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.btn input
+{
+  margin : 20px;
+
+    font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 80%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+
+}
+
+
+
+    </style>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js">
+    </script>
+            <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+            <script type="text/javascript" src="../webcam.min.js"></script>
+
+            <!-- Configure a few settings and attach camera -->
+            <script language="JavaScript">
+                            Webcam.set({
+                                width: 280,
+                                height: 200,
+                                image_format: 'jpeg',
+                                jpeg_quality: 90
+                            });
+            </script>
+</head>
+<body>
+<center>
+    <div class="login-page">
+        <div class="form">
+    <h1 style="color:#76b852; margin-bottom:50px;" >Sign up</h1>
+    <form method="post" >
+        {% csrf_token %}
+        {% if yflag %}
+        <p>already exist</p>
+        {% endif %}
+
+        {% for field in form %}
+        <p>
+            {{ field.label_tag }}<br>
+            {{ field }}
+            {% if field.help_text %}
+
+            {% endif %}
+            {% for error in field.errors %}
+        <p style="color: red">{{ error }}</p>
+        {% endfor %}
+        </p>
+        {% endfor %}
+
+
+        <!--------------web camera------------------>
+        <label>CAPTURE YOUR IMAGE:</label>
+        <div class="btn">
+        <input type="button" name="answer" value="OPEN CAMERA" onclick="showDiv()" required/><br><br>
+
+        <div id="capture" style="display:none;">
+            <div id="results">Your captured image will appear here...</div>
+            <div id="my_camera"></div>
+            <!-- First, include the Webcam.js JavaScript Library -->
+            <!-- A button for taking snaps -->
+            <form>
+                <input type="button" value="Access Camera" onClick="setup(); $(this).hide().next().show();">
+                <input type="button" value="Take Snapshot" onClick="take_snapshot()" style="display:none">
+                <input type="hidden" value="" name="index" id="getid" readonly>
+  <input type="submit" value="submit">
+            </form></div>
+        </div>
+
+    </form>
+
+         <!-- Code to handle taking the snapshot and displaying it locally -->
+            <script language="JavaScript">
+                        function setup() {
+                            Webcam.reset();
+                            Webcam.attach( '#my_camera' );
+                        }
+
+                        function take_snapshot() {
+                            // take snapshot and get image data
+                            Webcam.snap( function(data_uri) {
+                                // display results in page
+
+
+                            document.getElementById('results').innerHTML =
+                                '<h2>Here is your image:</h2>' +
+                                '<img src="'+data_uri+'"/>';
+                                  document.getElementById("getid").value = data_uri;
+                                console.log(data_uri);
+                                console.log("hii");            } );}
+
+                        function showDiv() {
+                   document.getElementById('capture').style.display = "block";
+                }</script>
+    </div>
+    </div>
+</center>
+</body>
+</html>
+
+{% endblock %}
